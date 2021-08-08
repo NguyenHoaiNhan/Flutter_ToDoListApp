@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'view/walkthrough.dart';
 
-void main() => runApp(StartUpPage());
+void main() => runApp(MyApp());
 
-class StartUpPage extends StatelessWidget {
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [SvgPicture.asset('assets/images/Fill_1.svg'), Text('aking')],
+    return MaterialApp(
+      home: SplashScreen(),
     );
   }
 }

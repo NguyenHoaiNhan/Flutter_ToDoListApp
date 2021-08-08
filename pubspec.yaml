@@ -21,7 +21,7 @@ environment:
   sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
-  flutter_svg: ^0.17.1
+  flutter_svg: ^0.22.0
   flutter:
     sdk: flutter
 
@@ -40,7 +40,11 @@ dev_dependencies:
 # The following section is specific to Flutter.
 flutter:
   assets:
-    - images/
+    - assets/images/
+  fonts: 
+    - family: avenirnextroundedpro
+      fonts:
+        - asset: assets/fonts/avenirnextroundedpro-bold.ttf
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
