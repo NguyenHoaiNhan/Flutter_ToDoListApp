@@ -57,7 +57,58 @@ class _BodyState extends State<OnboardBody> {
                         color: Color.fromRGBO(249, 96, 96, 1),
                         height: double.infinity,
                       ),
-                    )
+                    ),
+                    Center(
+                        child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Expanded(
+                            flex: 2,
+                            child: SizedBox(
+                              height: 20,
+                            )),
+                        Expanded(
+                          flex: 8,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              TextButton(
+                                onPressed: () {},
+                                child: Text(
+                                  "Get Started",
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      color: Color.fromRGBO(49, 49, 49, 1),
+                                      // backgroundColor: Colors.white,
+                                      fontFamily: 'avenirnextroundedpro'),
+                                ),
+                                style: ButtonStyle(
+                                  padding:
+                                      MaterialStateProperty.all<EdgeInsets>(
+                                    EdgeInsets.only(left: 115, right: 115),
+                                  ),
+                                  backgroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                          Colors.white),
+                                ),
+                              ),
+                              TextButton(
+                                onPressed: () {},
+                                child: Text(
+                                  "Log In",
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      color: Colors.white,
+                                      fontFamily: 'avenirnextroundedpro',
+                                      backgroundColor:
+                                          Color.fromRGBO(249, 96, 96, 1)),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ))
                   ],
                 ))
           ],
