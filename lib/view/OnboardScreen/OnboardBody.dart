@@ -12,16 +12,16 @@ class _BodyState extends State<OnboardBody> {
 
   List<Map<String, Color>> currentColor = [
     {
-      "firstLight": Color.fromRGBO(254, 223, 223, 1),
-      "firstDeep": Color.fromRGBO(249, 96, 96, 1)
+      "Light": Color.fromRGBO(254, 223, 223, 1),
+      "Deep": Color.fromRGBO(249, 96, 96, 1)
     },
     {
-      "secondlight": Color.fromRGBO(223, 227, 254, 1),
-      "secondDeep": Color.fromRGBO(96, 116, 249, 1)
+      "light": Color.fromRGBO(223, 227, 254, 1),
+      "Deep": Color.fromRGBO(96, 116, 249, 1)
     },
     {
-      "thirdLight": Color.fromRGBO(231, 223, 254, 1),
-      "thirdDeep": Color.fromRGBO(133, 96, 249, 1)
+      "Light": Color.fromRGBO(231, 223, 254, 1),
+      "Deep": Color.fromRGBO(133, 96, 249, 1)
     }
   ];
 
@@ -54,6 +54,11 @@ class _BodyState extends State<OnboardBody> {
             Expanded(
               flex: 5,
               child: PageView.builder(
+                onPageChanged: (value) {
+                  setState(() {
+                    currentPage = value;
+                  });
+                },
                 itemCount: currentData.length,
                 itemBuilder: (context, index) => OnBoardContent(
                   text1: currentData[index]['text1']!,
@@ -62,39 +67,52 @@ class _BodyState extends State<OnboardBody> {
                 ),
               ),
             ),
-            // Area for three dots that indexing the page
-
+            // Area for the dot indicator
+            Expanded(
+              flex: 1,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: List.generate(
+                        currentData.length, (index) => buildDot(index: index)),
+                  ),
+                ],
+              ),
+            ),
             // Area for Wave image
             Expanded(
-                flex: 3,
-                child: Stack(
-                  children: [
-                    Opacity(
-                      opacity: 0.25,
-                      child: ClipPath(
-                        clipper: WaveClipper_light(),
-                        child: Container(
-                          color: Colors.red,
-                          height: double.infinity,
-                        ),
-                      ),
-                    ),
-                    ClipPath(
-                      clipper: WaveClipper_deep(),
+              flex: 4,
+              child: Stack(
+                children: [
+                  Opacity(
+                    opacity: 0.25,
+                    child: ClipPath(
+                      clipper: WaveClipper_light(),
                       child: Container(
-                        color: Color.fromRGBO(249, 96, 96, 1),
+                        color: Colors.red,
                         height: double.infinity,
                       ),
                     ),
-                    Center(
-                        child: Column(
+                  ),
+                  ClipPath(
+                    clipper: WaveClipper_deep(),
+                    child: Container(
+                      color: Color.fromRGBO(249, 96, 96, 1),
+                      height: double.infinity,
+                    ),
+                  ),
+                  Center(
+                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Expanded(
-                            flex: 2,
-                            child: SizedBox(
-                              height: 20,
-                            )),
+                          flex: 2,
+                          child: SizedBox(
+                            height: 20,
+                          ),
+                        ),
                         Expanded(
                           flex: 8,
                           child: Column(
@@ -136,11 +154,25 @@ class _BodyState extends State<OnboardBody> {
                           ),
                         ),
                       ],
-                    ))
-                  ],
-                ))
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
+      ),
+    );
+  }
+
+  Container buildDot({int index = 0}) {
+    return Container(
+      margin: EdgeInsets.only(right: 5),
+      height: 6,
+      width: currentPage == index ? 12 : 6,
+      decoration: BoxDecoration(
+        color: currentPage == index ? Colors.redAccent : Colors.black,
+        borderRadius: BorderRadius.circular(3),
       ),
     );
   }
